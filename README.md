@@ -159,6 +159,69 @@ During the analysis the following activity was observed:
 
 ---
 
+
+## Identifying Suspicious Patterns & Attack Signatures
+
+In this section, I demonstrate how I identified specific "red flags" during my traffic analysis. By using Wireshark filters, I was able to isolate the following common attack signatures:
+
+<details>
+<summary><b>1. Detecting SYN Scans (Reconnaissance)</b></summary>
+
+I identified a **SYN Scan** (often used by `nmap`) by looking for a high volume of TCP connection requests that never completed the "Three-Way Handshake."
+
+* **What I did:** I applied the filter `tcp.flags.syn == 1 and tcp.flags.ack == 0`.
+* **The Signature:** I observed a single Source IP hitting hundreds of different Destination Ports in a very short timeframe.
+* **My Conclusion:** Since no `ACK` was sent back from the source to complete the connection, I confirmed this was an automated port discovery attempt.
+</details>
+
+<details>
+<summary><b>2. Identifying ICMP Flooding (Ping Sweep)</b></summary>
+
+I analyzed the traffic for **ICMP echo requests** (pings) used to map out which devices are "alive" on the network.
+
+* **What I did:** I filtered by `icmp`.
+* **The Signature:** I saw a rapid succession of "Echo Request" packets followed by "Echo Reply" packets.
+* **My Conclusion:** An unusual amount of ICMP traffic from one source to many internal IPs suggests a "Ping Sweep" for network mapping.
+</details>
+
+<details>
+<summary><b>3. spotting Clear-Text Credential Leaks</b></summary>
+
+I checked for insecure protocols where sensitive data might be exposed to an attacker.
+
+* **What I did:** I searched for `http` and `telnet` traffic.
+* **The Signature:** By using the **"Follow TCP Stream"** feature in Wireshark, I was able to see data in plain text rather than encrypted ciphertext.
+* **My Conclusion:** This highlighted the vulnerability of using non-encrypted protocols, as any attacker on the same network could intercept passwords or session tokens.
+</details>
+
+---
+## Defense Recommendations
+
+After identifying these attack signatures, I documented the following defensive strategies to harden the network.
+
+<details>
+<summary><b>Click to expand: How I would mitigate these threats</b></summary>
+
+### 1. Defending against Reconnaissance (Nmap Scans)
+* **Action:** Configure an **Intrusion Prevention System (IPS)** or a Firewall (like `iptables` or Windows Firewall).
+* **Strategy:** Set up "Rate Limiting" to block any IP address that attempts to connect to too many ports in a short window of time.
+* **Goal:** Make the network "quiet" so the scanner sees nothing but closed doors.
+
+### 2. Preventing Data Leaks (Clear-Text Vulnerabilities)
+* **Action:** Enforce the use of **TLS/SSL** for all web traffic.
+* **Strategy:** Disable insecure protocols like HTTP (Port 80), Telnet (Port 23), and FTP (Port 21) in favor of their encrypted versions (HTTPS, SSH, SFTP).
+* **Goal:** Ensure that even if a packet is captured in Wireshark, the "Follow TCP Stream" result is encrypted gibberish instead of private data.
+
+### 3. Monitoring & Alerting
+* **Action:** Use **Security Information and Event Management (SIEM)** tools.
+* **Strategy:** Create custom alerts based on the Wireshark filters I used (e.g., alert if SYN-to-ACK ratios are abnormal).
+* **Goal:** To be notified in real-time the moment a suspicious signature appears on the network.
+
+</details>
+
+---
+
+
 # Skills Demonstrated
 
 - Packet capture using Wireshark
