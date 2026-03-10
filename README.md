@@ -140,6 +140,11 @@ Multiple SYN packets targeting different ports may indicate reconnaissance scann
 
 Take a screenshot showing these packets.
 
+- To focus on your local IP:
+
+```text
+ip.addr == <your_local_IP>
+```
 ---
 
 # Findings
