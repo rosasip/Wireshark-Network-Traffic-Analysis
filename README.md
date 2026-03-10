@@ -149,6 +149,8 @@ During the analysis the following activity was observed:
 - DNS queries generated during normal browsing
 - TCP connections between local and external hosts
 - SYN packets produced by the Nmap scan indicating port scanning activity
+- Protocol Hierarchy and Conversations views summarize traffic patterns and host interactions.
+
 
 ---
 
