@@ -180,3 +180,25 @@ screenshots
 
 report
 - traffic-analysis-report.md
+
+## What I Learned
+
+<details>
+<summary><b>Click to expand: New Skills & Technical Workflow</b></summary>
+
+### Command Line & Scripting
+* **Terminal Navigation:** Mastered using `nano` for on-the-fly file editing. Learned essential shortcuts: `Ctrl+O` (Save) and `Ctrl+X` (Exit).
+* **Package Management:** Used `pip install scapy` to set up specialized Python libraries for network analysis.
+* **Packet Crafting:** Wrote custom Python scripts using **Scapy** to manually build and send Ethernet/IP/TCP layers.
+
+### Security & Privacy (OPSEC)
+* **Traffic Anonymization:** Used `editcap` to sanitize captures, ensuring Public IPs are mapped to `0.0.0.0` for safe GitHub sharing.
+* **Reconnaissance Detection:** Learned to identify the difference between normal handshake traffic and automated SYN scans.
+
+### Sample Scapy Script
+```python
+from scapy.all import IP, TCP, send
+
+# Crafting a safe packet with a fake source IP
+packet = IP(src="1.2.3.4", dst="127.0.0.1") / TCP(dport=80, flags="S")
+send(packet)
