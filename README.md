@@ -4,8 +4,9 @@
 This project demonstrates basic network traffic analysis using Wireshark. Network packets were captured from a local environment and analyzed to observe normal activity and detect suspicious patterns such as port scanning.
 
 ## Tools
-- Wireshark
-- Nmap
+- [Wireshark](https://www.wireshark.org/) – packet capture and analysis  
+- [Nmap](https://nmap.org/) – network scanning
+
 
 ## Project Goals
 - Capture live network traffic
