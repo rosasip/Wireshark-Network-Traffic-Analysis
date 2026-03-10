@@ -224,25 +224,19 @@ After identifying these attack signatures, I documented the following defensive 
 
 # Skills Demonstrated
 
-- Packet capture using Wireshark
-- Network protocol analysis
-- Traffic filtering and inspection
-- Detection of reconnaissance activity
+<details>
+<summary><b>Click to expand: Core Technical Competencies</b></summary>
 
----
+* **Network Protocol Analysis:** Performed deep-packet inspection of **TCP/IP, DNS, and HTTP** structures using [Wireshark](https://www.wireshark.org/).
+* **Security Scripting & Automation:** Leveraged **Scapy** (Python) to programmatically craft custom packets, simulating specific network behaviors.
+* **Operational Security (OPSEC):** Implemented data privacy workflows by using the **`editcap`** utility to sanitize `.pcapng` files before public sharing.
+* **Linux Command Line Mastery:** Gained proficiency in terminal-based workflows, including package management with `pip` and text manipulation using the **`nano`** editor.
+* **Threat Hunting & Pattern Recognition:** Identified attack signatures such as **TCP SYN Scans** and **ICMP Sweeps** using advanced display filters.
+* **Network Hardening:** Developed actionable defense strategies, including **Rate Limiting** and **Protocol Encryption**, to mitigate discovered vulnerabilities.
 
-# Repository Contents
+</details>
 
-captures
-- network_capture.pcap
 
-screenshots
-- protocol-hierarchy.png
-- dns-queries.png
-- syn-scan-detection.png
-
-report
-- traffic-analysis-report.md
 
 ## What I Learned
 
